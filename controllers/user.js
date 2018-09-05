@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt-nodejs');
 
 const User = require('../models/user');
+const jwt = require('../services/jwt');
 
 function pruebas(req, res) {
     res.json({
@@ -64,8 +65,6 @@ function saveUser(req, res) {
                 user: userStored
             });
         });
-
-
     });
 }
 
@@ -105,13 +104,14 @@ function loginUser(req, res) {
             }
 
             if (params.gethash) {
-                // Devolver un token de jwt
+                return res.json({
+                    token: jwt.createToken(user)
+                });
             }
 
             res.json({ user });
         });
     });
-
 }
 
 module.exports = {
