@@ -31,3 +31,20 @@ $ npm install mongoose
 # Paginación
 $ npm install mongoose-pagination
 ```
+
+## Base de datos
+
+```sql
+/* Creating a database */
+> use musify;
+
+/* Insert first document in the database */
+> db.artists.save({name: 'Metallica', desc:'Rock', img:''});
+
+/* Show inserted document */
+> db.artists.find();
+
+/* Show all databases */
+> show dbs;
+```
+
