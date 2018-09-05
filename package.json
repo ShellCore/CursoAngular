@@ -1,0 +1,19 @@
+{
+  "name": "musify",
+  "version": "1.0.0",
+  "description": "Proyecto API Rest con NodeJS de música",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShellCore/CursoAngular.git"
+  },
+  "author": "Cesar Morales Garduño",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShellCore/CursoAngular/issues"
+  },
+  "homepage": "https://github.com/ShellCore/CursoAngular#readme"
+}
