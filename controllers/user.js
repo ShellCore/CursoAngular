@@ -1,4 +1,6 @@
 const bcrypt = require('bcrypt-nodejs');
+const fs = require('fs');
+const path = require('path');
 
 const User = require('../models/user');
 const jwt = require('../services/jwt');
@@ -178,10 +180,28 @@ function uploadImg(req, res) {
     });
 }
 
+function getImageFile(req, res) {
+    let imageFile = req.params.imageFile;
+
+    let imagePath = `./uploads/users/${imageFile}`;
+
+    fs.exists(imagePath, (exists) => {
+        if (!exists) {
+            return res.status(400)
+                .json({
+                    message: 'El archivo no existe'
+                });
+        }
+
+        res.sendFile(path.resolve(imagePath));
+    });
+}
+
 module.exports = {
     pruebas,
     saveUser,
     loginUser,
     updateUser,
-    uploadImg
+    uploadImg,
+    getImageFile
 };
