@@ -5,7 +5,7 @@ const ArtistController = require('../controllers/artist');
 
 const md_auth = require('../middleware/authenticated');
 
-api.get('/artist', md_auth.ensureAuth, ArtistController.getArtist);
 api.post('/artist', md_auth.ensureAuth, ArtistController.saveArtist);
+api.get('/artist/:id', md_auth.ensureAuth, ArtistController.getArtist);
 
 module.exports = api;

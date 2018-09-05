@@ -6,8 +6,26 @@ var Album = require('../models/album');
 var Song = require('../models/song');
 
 function getArtist(req, res) {
-    res.json({
-        message: 'Método getArtist del controlador artist.js'
+    let artistId = req.params.id;
+
+    Artist.findById(artistId, (err, artist) => {
+        if (err) {
+            return res.status(500)
+                .json({
+                    message: 'Error en la petición'
+                });
+        }
+
+        if (!artist) {
+            return res.status(400)
+                .json({
+                    message: 'Artista no existe'
+                });
+        }
+
+        res.json({
+            artist
+        });
     });
 }
 
