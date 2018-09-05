@@ -139,9 +139,49 @@ function updateUser(req, res) {
     });
 }
 
+function uploadImg(req, res) {
+    let userId = req.params.id;
+    let fileName = 'No subido...';
+
+    if (!req.files) {
+        return res.status(400)
+            .json({
+                message: 'No se ha subido ninguna imagen'
+            });
+    }
+
+    let filePath = req.files.image.path;
+    let fileSplit = filePath.split('/');
+    fileName = fileSplit[2];
+    let extSplit = fileName.split('.');
+    let ext = extSplit[extSplit.length - 1];
+
+    let extensionesValidas = ['jpg', 'gif', 'png', 'jpeg'];
+    if (extensionesValidas.indexOf(ext) < 0) {
+        return res.status(400)
+            .json({
+                message: 'El archivo no tiene una extension permitida'
+            });
+    }
+
+    User.findByIdAndUpdate(userId, { img: fileName }, (err, userUpdated) => {
+        if (err) {
+            return res.status(500)
+                .json({
+                    message: 'Error al actualizar la imagen del usuario'
+                });
+        }
+
+        res.json({
+            user: userUpdated
+        });
+    });
+}
+
 module.exports = {
     pruebas,
     saveUser,
     loginUser,
-    updateUser
+    updateUser,
+    uploadImg
 };

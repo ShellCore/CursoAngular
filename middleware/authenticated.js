@@ -20,7 +20,6 @@ exports.ensureAuth = (req, res, next) => {
         }
 
     } catch (err) {
-        console.log(err);
         return res.status(404)
             .json({
                 message: 'Token no válido'
