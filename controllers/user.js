@@ -114,8 +114,34 @@ function loginUser(req, res) {
     });
 }
 
+function updateUser(req, res) {
+    var userId = req.params.id;
+    var update = req.body;
+
+    User.findByIdAndUpdate(userId, update, (err, userUpdated) => {
+        if (err) {
+            return res.status(500)
+                .json({
+                    message: 'Error al actualizar el usuario'
+                });
+        }
+
+        if (!userUpdated) {
+            return res.status(404)
+                .json({
+                    message: 'No se ha podido actualizar al usuario'
+                });
+        }
+
+        res.json({
+            user: userUpdated
+        })
+    });
+}
+
 module.exports = {
     pruebas,
     saveUser,
-    loginUser
+    loginUser,
+    updateUser
 };
