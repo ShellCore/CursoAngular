@@ -166,11 +166,51 @@ function deleteArtist(req, res) {
     });
 }
 
+function uploadImg(req, res) {
+    let artistId = req.params.id;
+    let fileName = 'No subido...';
+
+    if (!req.files) {
+        return res.status(400)
+            .json({
+                message: 'No se ha subido ninguna imagen'
+            });
+    }
+
+    let filePath = req.files.image.path;
+    let fileSplit = filePath.split('/');
+    fileName = fileSplit[2];
+    let extSplit = fileName.split('.');
+    let ext = extSplit[extSplit.length - 1];
+
+    let extensionesValidas = ['jpg', 'gif', 'png', 'jpeg'];
+    if (extensionesValidas.indexOf(ext) < 0) {
+        return res.status(400)
+            .json({
+                message: 'El archivo no tiene una extension permitida'
+            });
+    }
+
+    Artist.findByIdAndUpdate(artistId, { img: fileName }, (err, artistUpdated) => {
+        if (err) {
+            return res.status(500)
+                .json({
+                    message: 'Error al actualizar la imagen del artista'
+                });
+        }
+
+        res.json({
+            artist: artistUpdated
+        });
+    });
+}
+
 
 module.exports = {
     getArtist,
     saveArtist,
     getArtists,
     updateArtist,
-    deleteArtist
+    deleteArtist,
+    uploadImg
 }

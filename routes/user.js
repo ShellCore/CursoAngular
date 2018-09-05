@@ -5,7 +5,7 @@ const api = express.Router();
 const UserController = require('../controllers/user');
 
 const md_auth = require('../middleware/authenticated');
-const md_upload = multipart({ uploadDir: './uploads/users' })
+const md_upload = multipart({ uploadDir: './uploads/users' });
 
 api.get('/probandoControlador', md_auth.ensureAuth, UserController.pruebas);
 
