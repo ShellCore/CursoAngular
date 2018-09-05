@@ -102,7 +102,7 @@ function updateArtist(req, res) {
                 });
         }
         if (!artistUpdated) {
-            return res.status(500)
+            return res.status(400)
                 .json({
                     message: 'El artista no existe'
                 });
@@ -111,12 +111,66 @@ function updateArtist(req, res) {
         res.json({
             artist: artistUpdated
         });
-    })
+    });
 }
+
+function deleteArtist(req, res) {
+    let artistId = req.params.id;
+
+    Artist.findOneAndRemove(artistId, (err, artistRemoved) => {
+        if (err) {
+            return res.status(500)
+                .json({
+                    message: 'Error al eliminar el artista'
+                });
+        }
+        if (!artistRemoved) {
+            return res.status(400)
+                .json({
+                    message: 'El artista no existe'
+                });
+        }
+
+        Album.find({ artist: artistRemoved._id }).remove((err, albumRemoved) => {
+            if (err) {
+                return res.status(500)
+                    .json({
+                        message: 'Error al eliminar el album del artista'
+                    });
+            }
+            if (!albumRemoved) {
+                return res.status(400)
+                    .json({
+                        message: 'El album no existe'
+                    });
+            }
+
+            Song.find({ album: albumRemoved._id }).remove((err, songRemoved) => {
+                if (err) {
+                    return res.status(500)
+                        .json({
+                            message: 'Error al eliminar la canción del album'
+                        });
+                }
+                if (!songRemoved) {
+                    return res.status(400)
+                        .json({
+                            message: 'La canción no existe'
+                        });
+                }
+                res.json({
+                    artist: artistRemoved
+                });
+            });
+        });
+    });
+}
+
 
 module.exports = {
     getArtist,
     saveArtist,
     getArtists,
-    updateArtist
+    updateArtist,
+    deleteArtist
 }
