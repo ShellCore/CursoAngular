@@ -76,7 +76,6 @@ function getArtists(req, res) {
                         message: 'Error en la petición'
                     });
             }
-
             if (!artists) {
                 return res.json({
                     message: 'No se encontraron artistas'
@@ -88,11 +87,36 @@ function getArtists(req, res) {
                 artists
             });
         });
+}
 
+function updateArtist(req, res) {
+
+    let artistId = req.params.id;
+    let update = req.body;
+
+    Artist.findByIdAndUpdate(artistId, update, (err, artistUpdated) => {
+        if (err) {
+            return res.status(500)
+                .json({
+                    message: 'Error al guardar el artista'
+                });
+        }
+        if (!artistUpdated) {
+            return res.status(500)
+                .json({
+                    message: 'El artista no existe'
+                });
+        }
+
+        res.json({
+            artist: artistUpdated
+        });
+    })
 }
 
 module.exports = {
     getArtist,
     saveArtist,
-    getArtists
+    getArtists,
+    updateArtist
 }
