@@ -13,5 +13,6 @@ api.get('/albums/:artist?', md_auth.ensureAuth, AlbumController.getAlbums);
 api.put('/album/:id', md_auth.ensureAuth, AlbumController.updateAlbum);
 api.delete('/album/:id', md_auth.ensureAuth, AlbumController.deleteAlbum);
 api.post('/upload-image-Album/:id', [md_auth.ensureAuth, md_upload], AlbumController.uploadImg);
+api.get('/get-image-album/:imageFile', AlbumController.getImageFile);
 
 module.exports = api;

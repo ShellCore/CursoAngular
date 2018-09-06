@@ -9,25 +9,27 @@ var Song = require('../models/song');
 function getAlbum(req, res) {
     let albumId = req.params.id;
 
-    Album.findById(albumId, (err, album) => {
-        if (err) {
-            return res.status(500)
-                .json({
-                    message: 'Error en la petición'
-                });
-        }
+    Album.findById(albumId)
+        .populate({ path: 'artist' })
+        .exec((err, album) => {
+            if (err) {
+                return res.status(500)
+                    .json({
+                        message: 'Error en la petición'
+                    });
+            }
 
-        if (!album) {
-            return res.status(400)
-                .json({
-                    message: 'Album no existe'
-                });
-        }
+            if (!album) {
+                return res.status(400)
+                    .json({
+                        message: 'Album no existe'
+                    });
+            }
 
-        res.json({
-            album
+            res.json({
+                album
+            });
         });
-    });
 }
 
 function saveAlbum(req, res) {
@@ -192,6 +194,19 @@ function uploadImg(req, res) {
     });
 }
 
+function getImageFile(req, res) {
+    var imageFile = req.params.imageFile;
+    var path_file = './uploads/albums/' + imageFile;
+    fs.exists(path_file, (exists) => {
+        if (!exists) {
+            return res.status(400)
+                .json({
+                    message: 'No existe la imagen'
+                });
+        }
+        res.sendFile(path.resolve(path_file));
+    });
+}
 
 module.exports = {
     getAlbum,
@@ -199,5 +214,6 @@ module.exports = {
     getAlbums,
     updateAlbum,
     deleteAlbum,
-    uploadImg
+    uploadImg,
+    getImageFile
 }

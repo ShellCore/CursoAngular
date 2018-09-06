@@ -205,6 +205,19 @@ function uploadImg(req, res) {
     });
 }
 
+function getImageFile(req, res) {
+    var imageFile = req.params.imageFile;
+    var path_file = './uploads/artists/' + imageFile;
+    fs.exists(path_file, (exists) => {
+        if (!exists) {
+            return res.status(400)
+                .json({
+                    message: 'No existe la imagen'
+                });
+        }
+        res.sendFile(path.resolve(path_file));
+    });
+}
 
 module.exports = {
     getArtist,
@@ -212,5 +225,6 @@ module.exports = {
     getArtists,
     updateArtist,
     deleteArtist,
-    uploadImg
+    uploadImg,
+    getImageFile
 }
