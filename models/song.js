@@ -5,7 +5,7 @@ var SongSchema = Schema({
     number: Number,
     name: String,
     duration: String,
-    file: Number,
+    file: String,
     album: {
         type: Schema.ObjectId,
         ref: 'Album'
