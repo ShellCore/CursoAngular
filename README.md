@@ -55,3 +55,8 @@ $ npm install mongoose-pagination
 $ ng new client
 
 ```
+
+## Dependencias instaladas
+
+- [Bootstrap](https://getbootstrap.com/)
+- [JQuery](https://code.jquery.com/)
