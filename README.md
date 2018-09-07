@@ -48,3 +48,10 @@ $ npm install mongoose-pagination
 > show dbs;
 ```
 
+## Cliente angular
+
+```sh
+# Inicialización de proyecto Angular (en carpeta client)
+$ ng new client
+
+```
