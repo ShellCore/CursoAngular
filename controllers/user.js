@@ -175,7 +175,8 @@ function uploadImg(req, res) {
         }
 
         res.json({
-            user: userUpdated
+            user: userUpdated,
+            img: fileName
         });
     });
 }
