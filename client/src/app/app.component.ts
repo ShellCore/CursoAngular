@@ -80,4 +80,12 @@ export class AppComponent implements OnInit {
 			}
 		);
 	}
+
+	logout() {
+		localStorage.removeItem('identity');
+		localStorage.removeItem('token');
+		localStorage.clear();
+		this.identity = null;
+		this.token = null;
+	}
 }
