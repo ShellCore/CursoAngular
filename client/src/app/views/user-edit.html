@@ -27,8 +27,16 @@
                     El nombre es obligatorio
                 </span>
         </p>
+
+        <div class="image_for_edit" *ngIf="user.img && user.img != ''">
+            <img src="" />
+        </div>
         <p>
-            <input type="submit" value="Actualizar mis datos" class="btn btn-primary">
+            <label>Sube tu foto:</label>
+            <input type="file" placeholder="Subir imagen...">
         </p>
+
+        <input type="submit" value="Actualizar mis datos" class="btn btn-primary">
+
     </form>
 </div>

@@ -15,6 +15,7 @@ export class UserEditComponent implements OnInit {
     public identity;
     public token;
     public alertMessage;
+    public filesToUpload: Array<File>;
 
     constructor(private _userService : UserService) {
         this.titulo = 'Actualizar Datos';
@@ -51,5 +52,9 @@ export class UserEditComponent implements OnInit {
                 }
             }
         );
+    }
+
+    fileChangeEvent(fileInput : any) {
+        this.filesToUpload = <Array<File>> fileInput;
     }
 }
