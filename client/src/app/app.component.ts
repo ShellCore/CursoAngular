@@ -21,7 +21,11 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.identity = this._userService.getIdentity();
+		this.token = this._userService.getToken();
 
+		console.log(this.identity);
+		console.log(this.token);
 	}
 
 	public onSubmit() {
@@ -36,6 +40,10 @@ export class AppComponent implements OnInit {
 				if (!this.identity._id) {
 					alert('El usuario no está correctamente identificado');
 				} else {
+					// Crear elemento en el localStorage para tener al usuario sesión
+					localStorage.setItem('identity', JSON.stringify(identity));
+
+					// Conseguir el token para enviárselo a cada petición http
 					this._userService.signup(this.user, "true").subscribe(
 						response => {
 							console.log(response);
@@ -45,6 +53,8 @@ export class AppComponent implements OnInit {
 								alert('El token no se ha generado correctamente');
 							} else {
 								// Crear elemento en el localStorage para tener token disponible
+								localStorage.setItem('token', token);
+
 								console.log(token);
 								console.log(identity);
 							}
