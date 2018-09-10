@@ -17,7 +17,7 @@ export class UserService {
         if (hash != null) {
             userToLogin.gethash = hash;
         }
-        let params = JSON.stringify(userToLogin);s
+        let params = JSON.stringify(userToLogin);
         let headers = new Headers({'Content-Type':'application/json'});
 
         return this._htttp.post(this.url + 'login', params, {headers})
