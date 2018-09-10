@@ -10,14 +10,15 @@ import { UserService } from './services/user.service';
 export class AppComponent implements OnInit {
 	public title = 'Musify';
 	public user: User;
+	public userRegister: User;
 	public identity;
 	public token;
 	public errorMessage;
+	public alertRegister;
 
-	constructor(
-		private _userService: UserService
-	) {
+	constructor(private _userService: UserService) {
 		this.user = new User('', '', '', '', '', 'ROLE_USER', '');
+		this.userRegister = new User('', '', '', '', '', 'ROLE_USER', '');
 	}
 
 	ngOnInit() {
@@ -75,6 +76,30 @@ export class AppComponent implements OnInit {
 				if (errorMessage != null) {
 					var body = JSON.parse(error._body);
 					this.errorMessage = body.message;
+					console.log(error);
+				}
+			}
+		);
+	}
+
+	onSubmitRegister() {
+		console.log(this.userRegister);
+		this._userService.register(this.userRegister).subscribe(
+			response => {
+				let user = response.user;
+				this.userRegister = user;
+				if (!user._id) {
+					this.alertRegister = 'Error al registrarse';
+				} else {
+					this.alertRegister = `El registro se ha realizado correctamente, identifícate con ${this.userRegister.email}`;
+					this.userRegister = new User('', '', '', '', '', 'ROLE_USER', '');
+				}
+			},
+			error => {
+				var errorMessage = <any>error;
+				if (errorMessage != null) {
+					var body = JSON.parse(error._body);
+					this.alertRegister = body.message;
 					console.log(error);
 				}
 			}

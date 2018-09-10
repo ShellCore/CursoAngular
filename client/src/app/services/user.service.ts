@@ -15,14 +15,21 @@ export class UserService {
 
     signup(userToLogin, hash = null) {
         if (hash != null) {
-            userToLogin.getHash = hash;
+            userToLogin.gethash = hash;
         }
-        let json = JSON.stringify(userToLogin);
-        let params = json;
+        let params = JSON.stringify(userToLogin);s
         let headers = new Headers({'Content-Type':'application/json'});
 
         return this._htttp.post(this.url + 'login', params, {headers})
-        .pipe(map(res => res.json()));
+                .pipe(map(res => res.json()));
+    }
+
+    register(userToRegister) {
+        let params = JSON.stringify(userToRegister);
+        let headers = new Headers({'Content-Type': 'application/json'});
+
+        return this._htttp.post(this.url + 'register', params, {headers})
+                .pipe(map(res => res.json()));
     }
 
     getIdentity() {
