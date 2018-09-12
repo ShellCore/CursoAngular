@@ -3,11 +3,12 @@ import { UserService } from "../services/user.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { GLOBAL } from '../services/global';
 import { Artist } from '../models/artist';
+import { ArtistService } from '../services/artist.service';
 
 @Component({
     selector : 'artist-add',
     templateUrl : '../views/artist-add.html',
-    providers : [UserService]
+    providers : [UserService, ArtistService]
 })
 export class ArtistAddComponent implements OnInit {
     public titulo : string;
@@ -19,7 +20,8 @@ export class ArtistAddComponent implements OnInit {
     constructor(
         private _route : ActivatedRoute,
         private _router : Router,
-        private _userService : UserService
+        private _userService : UserService,
+        private _artistService : ArtistService
     ) {
         this.titulo = 'Crear nuevo artista';
         this.identity = this._userService.getIdentity();
@@ -32,4 +34,7 @@ export class ArtistAddComponent implements OnInit {
         console.log('artist-add.component.ts cargado');
     }
 
+    onSubmit() {
+        console.log(this.artist);
+    }
 }
