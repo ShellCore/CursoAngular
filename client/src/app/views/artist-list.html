@@ -3,11 +3,25 @@
     <a class="btn btn-default" *ngIf="identity && identity.role == 'ROLE_ADMIN'" [routerLink]="['/create-artist']">
         Añadir artista
     </a>
-</div>
 
+    <ul class="pagination pull-right">
+        <li><a [routerLink]="['/artists', prevPage]">&laquo;</a></li>
+        <li><a [routerLink]="['/artists', nextPage]">&raquo;</a></li>
+    </ul>
+
+</div>
 <div class="clearfix"></div>
-<ul class="artist-list" *ngIf="identity">
-    <li *ngFor="let artist of artists" class="col-lg-3 artist-item">
-        {{artist.name}}
+<ul class="artistList" *ngIf="identity">
+    <li *ngFor="let artist of artists" class="col-lg-3 artistItem">
+        <div class="artistImage">
+            <img src="{{url + 'get-image-artist/' + artist.img}}" alt="">
+        </div>
+        <div class="artistName">
+            <a href="">{{artist.name}}</a>
+        </div>
+        <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
+            <a [routerLink]="['/update-artist', artist._id]" class="btn btn-sm btn-warning">Editar</a>
+            <a href="#" class="btn btn-sm btn-danger">Borrar</a>
+        </div>
     </li>
 </ul>
