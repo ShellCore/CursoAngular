@@ -1,4 +1,4 @@
-<div class="col-lg-6">
+<div class="col-lg-6" *ngIf="identity && identity.role == 'ROLE_ADMIN'">
     <h1>{{titulo}}</h1>
 
     <div *ngIf="alertMessage">
@@ -24,8 +24,8 @@
         </p>
 
         <div *ngIf="isEdit">
-            <div class="imageForEdit" *ngIf="artist.img && artist.img != ''">
-                <img src="{{url + 'get-image-artist/' + artist.image}}">
+            <div class="artistImageForEdit" *ngIf="artist.img && artist.img != ''">
+                <img src="{{url + 'get-image-artist/' + artist.img}}">
             </div>
 
             <p>
@@ -36,4 +36,9 @@
 
         <input type="submit" value="{{titulo}}" [disabled]="!formArtist.form.valid" class="btn btn-success" />
     </form>
+</div>
+
+<div class="col-lg-6" *ngIf="!identity || identity.role != 'ROLE_ADMIN'">
+    <h1>Error</h1>
+    <p>No tienes acceso a esta parte de la aplicación</p>
 </div>

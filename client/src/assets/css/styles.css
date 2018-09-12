@@ -69,3 +69,7 @@ body {
 .btn-logout {
     cursor: pointer;
 }
+
+.artistImageForEdit img {
+    width: 150px;
+}

@@ -11,7 +11,7 @@ const appRoutes : Routes = [
     {path : 'artists/:page', component : ArtistListComponent},
     {path : 'create-artist', component : ArtistAddComponent},
     {path : 'update-artist/:id', component : ArtistEditComponent},
-    {path : 'mis-datos', component : UserEditComponent},
+    {path : 'my-data', component : UserEditComponent},
     {path : '**', component : HomeComponent},
 ];
 
