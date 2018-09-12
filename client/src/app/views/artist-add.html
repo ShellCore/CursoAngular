@@ -24,7 +24,7 @@
         </p>
 
         <div *ngIf="isEdit">
-            <div class="imageForEdit" *ngIf="artist.img != ''">
+            <div class="imageForEdit" *ngIf="artist.img && artist.img != ''">
                 <img src="{{url + 'get-image-artist/' + artist.image}}">
             </div>
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { UserService } from '../services/user.service';
 import { ArtistService } from '../services/artist.service';
 import { Artist } from '../models/artist';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { GLOBAL } from "../services/global";
 
 @Component({
@@ -36,9 +36,55 @@ export class ArtistEditComponent implements OnInit {
 
     ngOnInit(): void {
         console.log('artist-edit.component.ts creado');
+        this.getArtist();
     }
 
     onSubmit() {
-        
+        console.log(this.artist);
+        this._route.params.forEach((params: Params) => {
+            let id = params['id'];
+
+            this._artistService
+                .editArtist(this.token, id, this.artist)
+                .subscribe(
+                    response => {
+                        if (!response.artist) {
+                            this.alertMessage = 'Error en el servidor';
+                        } else {
+                            this.alertMessage = 'El artista se ha actualizado correctamente';
+                        }
+                    },
+                    error => {
+                        var errorMessage = <any> error;
+                    if (errorMessage != null) {
+                        var body = JSON.parse(error._body);
+                        this.alertMessage = body.message;
+                        console.log(error);
+                    }
+                    }
+                );
+        });
+    }
+
+    getArtist() {
+        this._route.params.forEach((params : Params) => {
+            let id = params['id'];
+            this._artistService.getArtist(this.token, id).subscribe(
+                response => {
+                    if (!response.artist) {
+                        this._router.navigate(['/']);
+                    } else {
+                        this.artist = response.artist;
+                    }
+                },
+                error => {
+                    var errorMessage = <any> error;
+                    if (errorMessage != null) {
+                        var body = JSON.parse(error._body);
+                        console.log(error);
+                    }
+                }
+            );
+        });
     }
 }

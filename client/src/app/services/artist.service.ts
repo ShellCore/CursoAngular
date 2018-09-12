@@ -34,7 +34,7 @@ export class ArtistService {
         let url = `${this.url}artists/${page}`
         return this._http
             .get(url, options)
-            .pipe(map(res => res.json));
+            .pipe(map(res => res.json()));
     }
 
     getArtist(token, id : string) {
@@ -47,7 +47,7 @@ export class ArtistService {
         let url = `${this.url}artist/${id}`
         return this._http
             .get(url, options)
-            .pipe(map(res => res.json));
+            .pipe(map(res => res.json()));
     }
 
     editArtist(token, id : string, artist: Artist) {
@@ -72,6 +72,6 @@ export class ArtistService {
         let url = `${this.url}artist/${id}`
         return this._http
             .delete(url, options)
-            .pipe(map(res => res.json));
+            .pipe(map(res => res.json()));
     }
 }
