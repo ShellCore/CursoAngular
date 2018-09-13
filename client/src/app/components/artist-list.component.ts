@@ -19,6 +19,7 @@ export class ArtistListComponent implements OnInit {
     public url : string;
     public nextPage;
     public prevPage;
+    public confirmado;
 
     constructor(
         private _route: ActivatedRoute,
@@ -37,6 +38,35 @@ export class ArtistListComponent implements OnInit {
     ngOnInit() {
         console.log('artist-list.component.js cargado');
         this.getArtists();
+    }
+
+    onDeleteConfirm(id) {
+        this.confirmado = id;
+        console.log(this.confirmado);
+    }
+
+    onCancelDelete() {
+        this.confirmado = null;
+    }
+
+    onDeleteArtist(id) {
+        this._artistService
+            .deleteArtist(this.token, id)
+            .subscribe(
+                response => {
+                    if (!response.artist) {
+                        alert('Error en el servidor');
+                    }
+                    this.getArtists();
+                },
+                error => {
+                    var errorMessage = <any> error;
+                    if (errorMessage != null) {
+                        var body = JSON.parse(error._body);
+                        console.log(error);
+                    }
+                }
+            );
     }
 
     getArtists() {

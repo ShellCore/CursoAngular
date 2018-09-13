@@ -35,6 +35,11 @@ body {
     overflow-y: scroll;
 }
 
+.seguro {
+    margin-top: -30px;
+    background: #222326;
+}
+
 .actived {
     border-bottom: 4px solid #84BD00;
     padding-bottom: 4px;
