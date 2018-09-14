@@ -153,3 +153,26 @@ body {
 #albumHeadCard .image img {
     height: 180px;
 }
+
+.songList {
+    margin: 0px;
+    padding: 0px;
+}
+
+.songItem {
+    list-style: none;
+    border-bottom: 1px solid #CCC;
+    padding-top: 3px;
+}
+
+.songItem .title {
+    padding: 12px;
+}
+
+.songItem .btn-success {
+    margin-right: 10px;
+}
+
+.songItem .buttons {
+    float: right;
+}

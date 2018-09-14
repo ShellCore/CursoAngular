@@ -24,10 +24,12 @@
                     </a>
                     {{song.number + '. ' + song.name + ' - ' + song.duration}}
 
-                    <p *ngIf="identity.role == 'ROLE_ADMIN'">
+                    <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
                         <a [routerLink]="['/update-song', song._id]" class="btn btn-sm btn-warning">Editar</a>
                         <a (click)="onDeleteConfirm(song._id)" class="btn btn-sm btn-danger">Borrar</a>
-                    </p>
+                    </div>
+
+                    <div class="clearfix"></div>
 
                 </div>
 
