@@ -25,16 +25,16 @@
             <span *ngIf="!year.valid && year.touched">El año es obligatorio</span>
         </p>
 
-        <!-- <div *ngIf="isEdit">
-            <div class="artistImageForEdit" *ngIf="artist.img && artist.img != ''">
-                <img src="{{url + 'get-image-artist/' + artist.img}}">
+        <div *ngIf="isEdit">
+            <div class="albumImageForEdit" *ngIf="album.img && album.img != ''">
+                <img src="{{url + 'get-image-album/' + album.img}}">
             </div>
 
             <p>
-                <label>Sube la imagen del artista</label>
+                <label>Sube la imagen del album</label>
                 <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)">
             </p>
-        </div> -->
+        </div>
 
         <input type="submit" value="{{titulo}}" [disabled]="!formAlbum.form.valid" class="btn btn-success" />
     </form>

@@ -80,7 +80,8 @@ body {
     cursor: pointer;
 }
 
-.artistImageForEdit img {
+.artistImageForEdit img,
+.albumImageForEdit img {
     width: 150px;
 }
 
