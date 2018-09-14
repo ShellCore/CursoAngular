@@ -11,3 +11,4 @@ api/uploads/albums/*.jpg
 api/uploads/albums/*.png
 api/uploads/albums/*.gif
 api/uploads/albums/*.jpeg
+api/uploads/songs/*.mp3

@@ -28,7 +28,7 @@ export class SongAddComponent implements OnInit {
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
         this.url = GLOBAL.url;
-        this.song = new Song(0, '', 0,'', '');
+        this.song = new Song(0, '', '', '', '');
     }
 
     ngOnInit(): void {
@@ -36,32 +36,32 @@ export class SongAddComponent implements OnInit {
     }
 
     onSubmit() {
-        // this._route.params.forEach((params: Params) => {
-        //     let artistId = params['artist'];
-        //     this.album.artist = artistId;
+        this._route.params.forEach((params: Params) => {
+            let albumId = params['album'];
+            this.song.album = albumId;
 
-        //     this._albumService
-        //         .addAlbum(this.token, this.album)
-        //         .subscribe(
-        //             response => {
-        //                 if (!response.album) {
-        //                     this.alertMessage = 'Error en el servidor';
-        //                 } else {
-        //                     this.album = response.album;
-        //                     this.alertMessage = 'El album se ha creado correctamente';
-        //                     this._router.navigate(['/update-album', response.album._id]);
-        //                 }
-        //             },
-        //             error => {
-        //                 var errorMessage = <any>error;
-        //                 if (errorMessage != null) {
-        //                     var body = JSON.parse(error._body);
-        //                     this.alertMessage = body.message;
-        //                     console.log(error);
-        //                 }
-        //             }
-        //         );
-        // });
+            this._songService
+                .addSong(this.token, this.song)
+                .subscribe(
+                    response => {
+                        if (!response.song) {
+                            this.alertMessage = 'Error en el servidor';
+                        } else {
+                            this.song = response.song;
+                            this.alertMessage = 'La canción se ha creado correctamente';
+                            this._router.navigate(['/update-song', response.song._id]);
+                        }
+                    },
+                    error => {
+                        var errorMessage = <any>error;
+                        if (errorMessage != null) {
+                            var body = JSON.parse(error._body);
+                            this.alertMessage = body.message;
+                            console.log(error);
+                        }
+                    }
+                );
+        });
         console.log(this.song);
     }
 }
