@@ -19,7 +19,7 @@
         <ul class="songList">
             <li *ngFor="let song of songs" class="songItem">
                 <div class="title">
-                    <a class="btn btn-success">
+                    <a class="btn btn-success" (click)="startPlayer(song)">
                         <span class="glyphicon glyphicon-play"></span>
                     </a>
                     {{song.number + '. ' + song.name + ' - ' + song.duration}}
@@ -35,31 +35,7 @@
                     </div>
 
                     <div class="clearfix"></div>
-
                 </div>
-
-                <!-- <div class="albumImage">
-                    <img src="{{url + 'get-image-album/' + album.img}}">
-                </div>
-                <div class="albumName">
-                    <p>
-                        <a [routerLink]="['/album', album._id]">{{album.title}}</a>
-                    </p>
-                    <p>
-                        <a [routerLink]="['/artist', album.artist._id]">
-                            {{album.artist.name}}
-                        </a>
-                    </p>
-
-                    <div class="buttons" *ngIf="identity.role == 'ROLE_ADMIN'">
-                        <a [routerLink]="['/update-album', album._id]" class="btn btn-sm btn-warning">Editar</a>
-                        <a (click)="onDeleteConfirm(album._id)" class="btn btn-sm btn-danger">Borrar</a>
-                    </div>
-                </div>
-                <div class="seguro" *ngIf="confirmado == album._id">
-                    <a (click)="onDeleteAlbum(album._id)" class="btn btn-sm btn-danger">Eliminar</a>
-                    <a (click)="onCancelDelete()" class="btn btn-sm btn-primary">Cancelar</a>
-                </div> -->
             </li>
         </ul>
     </div>

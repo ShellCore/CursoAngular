@@ -20,6 +20,7 @@ import { Song } from '../models/song';
             <span id="playSongTitle">
                 {{song.name}}
             </span>
+            |
             <span id="playSongArtist">
                 <span *ngIf="song.album && song.album.artist">
                     {{song.album.artist.name}}
