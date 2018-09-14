@@ -176,3 +176,8 @@ body {
 .songItem .buttons {
     float: right;
 }
+
+.songItem .seguro {
+    float: right;
+    margin-right: -109px;
+}

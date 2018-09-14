@@ -86,32 +86,32 @@ export class AlbumDetailComponent implements OnInit {
         });
     }
 
-    // onDeleteConfirm(id) {
-    //     this.confirmado = id;
-    // }
+    onDeleteConfirm(id) {
+        this.confirmado = id;
+    }
 
-    // onCancelDelete() {
-    //     this.confirmado = null;
-    // }
+    onCancelDelete() {
+        this.confirmado = null;
+    }
 
-    // onDeleteAlbum(id) {
-    //     this._albumService
-    //         .deleteAlbum(this.token, id)
-    //         .subscribe(
-    //             response => {
-    //                 if (!response.album) {
-    //                     alert('Error en el servidor');
-    //                 } else {
-    //                     this.getArtist();
-    //                 }
-    //             },
-    //             error => {
-    //                 var errorMessage = <any> error;
-    //                 if (errorMessage != null) {
-    //                     var body = JSON.parse(error.body);
-    //                     console.log(error);
-    //                 }
-    //             }
-    //         );
-    // }
+    onDeleteSong(id) {
+        this._songService
+            .deleteSong(this.token, id)
+            .subscribe(
+                response => {
+                    if (!response.song) {
+                        alert('Error en el servidor');
+                    } else {
+                        this.getAlbum();
+                    }
+                },
+                error => {
+                    var errorMessage = <any> error;
+                    if (errorMessage != null) {
+                        var body = JSON.parse(error.body);
+                        console.log(error);
+                    }
+                }
+            );
+    }
 }
