@@ -13,7 +13,7 @@ import { Album } from '../models/album';
 })
 export class AlbumDetailComponent implements OnInit {
     public titulo;
-    public albums : Album;
+    public album : Album;
     public identity;
     public token;
     public url : string;
@@ -39,48 +39,48 @@ export class AlbumDetailComponent implements OnInit {
     }
 
     getAlbum() {
-        console.log('El método funciona');
-        // this._route.params.forEach((params : Params) => {
-        //     let id = params['id'];
+        this._route.params.forEach((params : Params) => {
+            let id = params['id'];
 
-        //     this._artistService
-        //         .getArtist(this.token, id)
-        //         .subscribe(
-        //             response => {
-        //                 if (!response.artist) {
-        //                     this._router.navigate(['/']);
-        //                 } else {
-        //                     this.artist = response.artist;
+            this._albumService
+                .getAlbum(this.token, id)
+                .subscribe(
+                    response => {
+                        if (!response.album) {
+                            this._router.navigate(['/']);
+                        } else {
+                            this.album = response.album;
+                            // this.artist = response.artist;
 
-        //                     this._albumService
-        //                         .getAlbums(this.token, response.artist._id)
-        //                         .subscribe(
-        //                             response => {
-        //                                 if (!response.albums) {
-        //                                     this.alertMessage = 'Este artista no tiene albums';
-        //                                 } else {
-        //                                     this.albums = response.albums;
-        //                                 }
-        //                             },
-        //                             error => {
-        //                                 var errorMessage = <any> error;
-        //                                 if (errorMessage != null) {
-        //                                     var body = JSON.parse(error.body);
-        //                                     console.log(error);
-        //                                 }
-        //                             }
-        //                         );
-        //                 }
-        //             },
-        //             error => {
-        //                 var errorMessage = <any> error;
-        //                 if (errorMessage != null) {
-        //                     var body = JSON.parse(error.body);
-        //                     console.log(error);
-        //                 }
-        //             }
-        //         );
-        // });
+                            // this._albumService
+                            //     .getAlbums(this.token, response.artist._id)
+                            //     .subscribe(
+                            //         response => {
+                            //             if (!response.albums) {
+                            //                 this.alertMessage = 'Este artista no tiene albums';
+                            //             } else {
+                            //                 this.albums = response.albums;
+                            //             }
+                            //         },
+                            //         error => {
+                            //             var errorMessage = <any> error;
+                            //             if (errorMessage != null) {
+                            //                 var body = JSON.parse(error.body);
+                            //                 console.log(error);
+                            //             }
+                            //         }
+                            //     );
+                        }
+                    },
+                    error => {
+                        var errorMessage = <any> error;
+                        if (errorMessage != null) {
+                            var body = JSON.parse(error.body);
+                            console.log(error);
+                        }
+                    }
+                );
+        });
     }
 
     // onDeleteConfirm(id) {

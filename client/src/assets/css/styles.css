@@ -140,7 +140,8 @@ body {
     color: white;
 }
 
-#artistHeadCard .image {
+#artistHeadCard .image,
+#albumHeadCard .image {
     width: 150px;
     height: 150px;
     overflow: hidden;
@@ -148,6 +149,7 @@ body {
     margin-right: 30px;
 }
 
-#artistHeadCard .image img {
+#artistHeadCard .image img,
+#albumHeadCard .image img {
     height: 150px;
 }
