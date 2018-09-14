@@ -5,8 +5,9 @@
         </div>
         <div class="data">
             <h1>{{album.title}}</h1>
-            <p class="description">{{album.year}}</p>
-            <p class="description">{{album.desc}}</p>
+            <p><strong>{{album.artist.name}}</strong></p>
+            <p>{{album.year}}</p>
+            <p>{{album.desc}}</p>
 
             <a *ngIf="identity.role == 'ROLE_ADMIN'" [routerLink]="['/create-song', album._id]" class="btn btn-default">Añadir Canción</a>
         </div>
@@ -14,12 +15,23 @@
 
     <div class="clearfix"></div>
 
-    <!-- <div id="galleryAlbums" *ngIf="albums">
+    <div id="gallerySongs" *ngIf="songs">
+        <ul class="songList">
+            <li *ngFor="let song of songs" class="songItem">
+                <div class="title">
+                    <a class="btn btn-success">
+                        <span class="glyphicon glyphicon-play"></span>
+                    </a>
+                    {{song.number + '. ' + song.name + ' - ' + song.duration}}
 
+                    <p *ngIf="identity.role == 'ROLE_ADMIN'">
+                        <a [routerLink]="['/update-song', song._id]" class="btn btn-sm btn-warning">Editar</a>
+                        <a (click)="onDeleteConfirm(song._id)" class="btn btn-sm btn-danger">Borrar</a>
+                    </p>
 
-        <ul class="albumList">
-            <li *ngFor="let album of albums" class="col-lg-4 albumItem">
-                <div class="albumImage">
+                </div>
+
+                <!-- <div class="albumImage">
                     <img src="{{url + 'get-image-album/' + album.img}}">
                 </div>
                 <div class="albumName">
@@ -40,8 +52,8 @@
                 <div class="seguro" *ngIf="confirmado == album._id">
                     <a (click)="onDeleteAlbum(album._id)" class="btn btn-sm btn-danger">Eliminar</a>
                     <a (click)="onCancelDelete()" class="btn btn-sm btn-primary">Cancelar</a>
-                </div>
+                </div> -->
             </li>
         </ul>
-    </div> -->
+    </div>
 </div>
