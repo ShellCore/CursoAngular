@@ -35,9 +35,13 @@ body {
     overflow-y: scroll;
 }
 
-.seguro {
+.artistItem .seguro {
     margin-top: -30px;
     background: #222326;
+}
+
+.albumItem .seguro {
+    margin-top: -40px;
 }
 
 .actived {
@@ -80,18 +84,21 @@ body {
     cursor: pointer;
 }
 
-.artistImageForEdit img {
+.artistImageForEdit img,
+.albumImageForEdit img {
     width: 150px;
 }
 
-.artistList {
+.artistList,
+.albumList {
     margin: 0dx;
     padding: 0px;
     margin-top: 30px;
     list-style: none;
 }
 
-.artistItem {
+.artistItem,
+.albumItem {
     width: 23%;
     margin: 0px;
     padding: 0px;
@@ -102,7 +109,8 @@ body {
     background: #222326;
 }
 
-.artistImage {
+.artistImage,
+.albumImage {
     height: 245px;
     width: 100%;
     overflow: hidden;
@@ -113,16 +121,27 @@ body {
     height: 100%;
 }
 
-.artistName {
+.albumImage img {
+    width: 100%
+}
+
+.albumItem {
+    height: 370px;
+}
+
+.artistName,
+.albumName {
     color: white;
     padding: 10px;
 }
 
-.artistName a {
+.artistName a,
+.albumName a {
     color: white;
 }
 
-#artistHeadCard .image {
+#artistHeadCard .image,
+#albumHeadCard .image {
     width: 150px;
     height: 150px;
     overflow: hidden;
@@ -130,6 +149,7 @@ body {
     margin-right: 30px;
 }
 
-#artistHeadCard .image img {
+#artistHeadCard .image img,
+#albumHeadCard .image img {
     height: 150px;
 }

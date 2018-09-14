@@ -116,8 +116,9 @@ function updateArtist(req, res) {
 
 function deleteArtist(req, res) {
     let artistId = req.params.id;
+    console.log(artistId);
 
-    Artist.findOneAndRemove(artistId, (err, artistRemoved) => {
+    Artist.findByIdAndRemove(artistId, (err, artistRemoved) => {
         if (err) {
             return res.status(500)
                 .json({
@@ -130,6 +131,8 @@ function deleteArtist(req, res) {
                     message: 'El artista no existe'
                 });
         }
+
+        console.log(artistRemoved);
 
         Album.find({ artist: artistRemoved._id }).remove((err, albumRemoved) => {
             if (err) {

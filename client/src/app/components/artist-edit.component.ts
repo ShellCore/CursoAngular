@@ -7,27 +7,27 @@ import { GLOBAL } from "../services/global";
 import { UploadService } from "../services/upload.service";
 
 @Component({
-    selector : 'artist-edit',
-    templateUrl : '../views/artist-add.html',
-    providers : [UserService, ArtistService, UploadService]
+    selector: 'artist-edit',
+    templateUrl: '../views/artist-add.html',
+    providers: [UserService, ArtistService, UploadService]
 })
 export class ArtistEditComponent implements OnInit {
-    
-    public titulo : string;
-    public artist : Artist;
+
+    public titulo: string;
+    public artist: Artist;
     public identity;
     public token;
-    public url : string;
+    public url: string;
     public alertMessage;
     public isEdit;
-    public filesToUpload : Array<File>;
+    public filesToUpload: Array<File>;
 
     constructor(
-        private _route : ActivatedRoute,
-        private _router : Router,
-        private _userService : UserService,
-        private _artistService : ArtistService,
-        private _uploadService : UploadService
+        private _route: ActivatedRoute,
+        private _router: Router,
+        private _userService: UserService,
+        private _artistService: ArtistService,
+        private _uploadService: UploadService
     ) {
         this.titulo = 'Editar artista';
         this.identity = this._userService.getIdentity();
@@ -55,32 +55,36 @@ export class ArtistEditComponent implements OnInit {
                             this.alertMessage = 'Error en el servidor';
                         } else {
                             this.alertMessage = 'El artista se ha actualizado correctamente';
-                            let url = `${this.url}upload-image-artist/${id}`;
-                        this._uploadService.makeFileRequest(url, [], this.filesToUpload, this.token, 'image')
-                            .then(
-                                (result : any) => {
-                                    this._router.navigate(['/artists', 1]);
-                                }, 
-                                (error) => {
-                                    console.log(error);
-                                }
-                            );
+                            if (!this.filesToUpload) {
+                                this._router.navigate(['/artist', response.artist._id]);
+                            } else {
+                                let url = `${this.url}upload-image-artist/${id}`;
+                            this._uploadService.makeFileRequest(url, [], this.filesToUpload, this.token, 'image')
+                                .then(
+                                    (result: any) => {
+                                        this._router.navigate(['/artist', response.artist._id]);
+                                    },
+                                    (error) => {
+                                        console.log(error);
+                                    }
+                                );
+                            }
                         }
                     },
                     error => {
-                        var errorMessage = <any> error;
-                    if (errorMessage != null) {
-                        var body = JSON.parse(error._body);
-                        this.alertMessage = body.message;
-                        console.log(error);
-                    }
+                        var errorMessage = <any>error;
+                        if (errorMessage != null) {
+                            var body = JSON.parse(error._body);
+                            this.alertMessage = body.message;
+                            console.log(error);
+                        }
                     }
                 );
         });
     }
 
     getArtist() {
-        this._route.params.forEach((params : Params) => {
+        this._route.params.forEach((params: Params) => {
             let id = params['id'];
             this._artistService.getArtist(this.token, id).subscribe(
                 response => {
@@ -91,7 +95,7 @@ export class ArtistEditComponent implements OnInit {
                     }
                 },
                 error => {
-                    var errorMessage = <any> error;
+                    var errorMessage = <any>error;
                     if (errorMessage != null) {
                         var body = JSON.parse(error._body);
                         console.log(error);
@@ -101,7 +105,7 @@ export class ArtistEditComponent implements OnInit {
         });
     }
 
-    fileChangeEvent(fileInput : any) {
-        this.filesToUpload = <Array<File>> fileInput.target.files;
+    fileChangeEvent(fileInput: any) {
+        this.filesToUpload = <Array<File>>fileInput.target.files;
     }
 }

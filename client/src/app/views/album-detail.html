@@ -1,19 +1,20 @@
-<div class="artistBox" *ngIf="artist">
-    <div id="artistHeadCard">
+<div class="albumBox" *ngIf="album">
+    <div id="albumHeadCard">
         <div class="image">
-            <img src="{{url + 'get-image-artist/' + artist.img}}" *ngIf="artist.img && artist.img != ''">
+            <img src="{{url + 'get-image-album/' + album.img}}" *ngIf="album.img && album.img != ''">
         </div>
         <div class="data">
-            <h1>{{artist.name}}</h1>
-            <p class="description">{{artist.desc}}</p>
+            <h1>{{album.title}}</h1>
+            <p class="description">{{album.year}}</p>
+            <p class="description">{{album.desc}}</p>
 
-            <a *ngIf="identity.role == 'ROLE_ADMIN'" [routerLink]="['/create-album', artist._id]" class="btn btn-default">Añadir Album</a>
+            <a *ngIf="identity.role == 'ROLE_ADMIN'" [routerLink]="['/create-song', album._id]" class="btn btn-default">Añadir Canción</a>
         </div>
     </div>
 
     <div class="clearfix"></div>
 
-    <div id="galleryAlbums" *ngIf="albums">
+    <!-- <div id="galleryAlbums" *ngIf="albums">
 
 
         <ul class="albumList">
@@ -42,5 +43,5 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </div> -->
 </div>

@@ -1,1 +1,13 @@
 api/node_modules/
+api/uploads/users/*.jpg
+api/uploads/users/*.png
+api/uploads/users/*.gif
+api/uploads/users/*.jpeg
+api/uploads/artists/*.jpg
+api/uploads/artists/*.png
+api/uploads/artists/*.gif
+api/uploads/artists/*.jpeg
+api/uploads/albums/*.jpg
+api/uploads/albums/*.png
+api/uploads/albums/*.gif
+api/uploads/albums/*.jpeg
