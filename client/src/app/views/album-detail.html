@@ -8,8 +8,7 @@
             <p class="description">{{album.year}}</p>
             <p class="description">{{album.desc}}</p>
 
-            <a *ngIf="identity.role == 'ROLE_ADMIN'" href="#" class="btn btn-default">Añadir Canción</a>
-            <!-- <a *ngIf="identity.role == 'ROLE_ADMIN'" [routerLink]="['/create-song', album._id]" class="btn btn-default">Añadir Canción</a> -->
+            <a *ngIf="identity.role == 'ROLE_ADMIN'" [routerLink]="['/create-song', album._id]" class="btn btn-default">Añadir Canción</a>
         </div>
     </div>
 
