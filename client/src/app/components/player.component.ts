@@ -38,15 +38,18 @@ export class PlayerComponent implements OnInit {
     public url : string;
     public song;
 
-    constructor(
-
-    ) {
+    constructor() {
         this.url = GLOBAL.url;
-        this.song = new Song(0,'','','','');
     }
     
     ngOnInit(): void {
         console.log('Player cargado');
+        
+        var song = JSON.parse(localStorage.getItem('playing_song'));
+        if (song) {
+            this.song = song
+        } else {
+            this.song = new Song(0,'','','','');
+        }
     }
-
 }
