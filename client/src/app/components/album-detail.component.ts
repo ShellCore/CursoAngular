@@ -114,4 +114,21 @@ export class AlbumDetailComponent implements OnInit {
                 }
             );
     }
+
+    startPlayer(song) {
+        let songPlayer = JSON.stringify(song);
+        let filePath = `${this.url}get-file-song/${song.file}`;
+        let imagePath = `${this.url}get-image-album/${song.album.img}`;
+
+        localStorage.setItem('playing_song', songPlayer);
+        document.getElementById('mp3Source')
+            .setAttribute("src", filePath);
+        (document.getElementById('player') as any).load();
+        (document.getElementById('player') as any).play();
+
+        document.getElementById('playSongTitle').innerHTML = song.name;
+        document.getElementById('playSongArtist').innerHTML = song.album.artist.name;
+        document.getElementById('playImageAlbum')
+            .setAttribute("src", imagePath);
+    }
 }
