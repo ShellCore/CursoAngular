@@ -118,7 +118,7 @@ function updateSong(req, res) {
         }
 
         res.json({
-            album: songUpdated
+            song: songUpdated
         });
     });
 }
