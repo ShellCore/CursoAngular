@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Album } from '../models/album';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { UserService } from "../services/user.service";
 import { ArtistService } from "../services/artist.service";
 import { GLOBAL } from '../services/global';
@@ -33,5 +33,13 @@ export class AlbumAddComponent implements OnInit {
     
     ngOnInit(): void {
         console.log('album-add.component.ts cargado');
+    }
+
+    onSubmit() {
+        this._route.params.forEach((params : Params) => {
+            let artistId = params['artist'];
+            this.album.artist = artistId;
+        });
+        console.log(this.album);
     }
 }
