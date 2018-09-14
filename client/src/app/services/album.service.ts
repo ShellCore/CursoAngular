@@ -63,4 +63,16 @@ export class AlbumService {
         return this._http.put(url, params, {headers})
             .pipe(map(res => res.json()));
     }
+
+    deleteAlbum(token, id : string) {
+        let headers = new Headers({
+            'Content-Type' : 'application/json',
+            'authorization' : token
+        });
+
+        let options = new RequestOptions({headers});
+        let url = `${this.url}album/${id}`;
+        return this._http.delete(url, options)
+            .pipe(map(res => res.json()));
+    }
 }

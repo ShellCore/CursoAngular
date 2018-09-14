@@ -35,9 +35,13 @@ body {
     overflow-y: scroll;
 }
 
-.seguro {
+.artistItem .seguro {
     margin-top: -30px;
     background: #222326;
+}
+
+.albumItem .seguro {
+    margin-top: -40px;
 }
 
 .actived {
